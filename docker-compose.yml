@@ -1,0 +1,46 @@
+services:
+  gemma4-server: 
+    image: ${BASE_DOCKER_IMAGE}
+    container_name: gemma4
+    shm_size: '4gb'
+    ports:
+      - "${MODEL_PORT}:8080"
+    volumes:
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    environment:
+      - HF_TOKEN=${HF_TOKEN}
+      - MODEL_LOGGING_LEVEL=DEBUG
+      - LLAMA_ARG_N_PREDICT=1024    
+      - LLAMA_ARG_HF_REPO=${BASE_MODEL}
+      - LLAMA_ARG_HF_FILE=${HF_FILE}    
+      - LLAMA_ARG_ENDPOINT_METRICS=true         
+    command: >
+      --host 0.0.0.0
+      --port ${MODEL_PORT}
+      --ctx-size ${CTX_SIZE}
+      --threads 8
+      --parallel 4
+      --cont-batching
+    deploy:
+      resources:
+        limits:
+          memory: 16g
+
+    networks:
+      backend-net:
+        aliases:
+          - llm
+      monitoring_network: {}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:${MODEL_PORT}/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5     
+      start_period: 60s
+    restart: unless-stopped
+
+networks:
+  backend-net:
+    driver: bridge
+  monitoring_network:
+    driver: bridge

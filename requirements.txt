@@ -1,0 +1,8 @@
+dotenv
+transformers
+accelerate
+torchinfo
+torch
+torchvision
+torchaudio
+langchain-openai
