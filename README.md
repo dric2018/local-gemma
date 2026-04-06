@@ -67,4 +67,5 @@ print(response.content)
 # Notes
 - Version `ggml-org/gemma-4-E4B-it-GGUF` seem overthinking almost all questions
     - Getting an average of `11 t/s` with the specified setup
-    - capabilities on African languages needs further testing, but first trials on `Kinyarwanda` was not promising
+    - capabilities on African languages needs further testing, but first trials on `Kinyarwanda` was not so great. Asked for the translation of `sand` into kinyarwanda and got different answers in 5 requests (`amabuye`, `Amabara`, `umushyu`, `uburiro`, `isandi`, `amabindi`)...before the model started identifying the kinyarwanda query as `Sesotho` or many languages from the Southern region.
+
