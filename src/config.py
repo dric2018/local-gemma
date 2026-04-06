@@ -27,7 +27,7 @@ class CFG:
 
     # model
     MODEL_ID                = os.getenv("BASE_MODEL", "google/gemma-4-E2B-it")
-    MAX_NEW_TOKENS          = 1024
+    MAX_NEW_TOKENS          = 8192
     DEVICE_MAP              = "auto"
     MODEL_CTX_SIZE          = os.getenv("CTX_SIZE", 32_000)
     MODEL_PORT              = os.getenv("MODEL_PORT", "8080")

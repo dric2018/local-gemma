@@ -63,6 +63,8 @@ llm = ChatOpenAI(
 response = llm.invoke("Explain Docker in one sentence.")
 print(response.content)
 ```
+
 # Notes
 - Version `ggml-org/gemma-4-E4B-it-GGUF` seem overthinking almost all questions
+    - Getting an average of `11 t/s` with the specified setup
     - capabilities on African languages needs further testing, but first trials on `Kinyarwanda` was not promising
